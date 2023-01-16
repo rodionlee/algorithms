@@ -85,14 +85,32 @@ function replicate(times, number) {
     return [number].concat(replicate(times-1, number));
 }
 
-function fibonacci(n) {
-    if (n < 2)
-        return n;
+// Fibonacci (recursive version)
+function fibonacci(n, arr = [0, 1]) {
 
-    
+    if (arr.length >= n) {
+        return arr;
+    }
 
-    return ([fibonacci(n - 1) + fibonacci(n - 2)]);
+    const newNumber = arr.at(-1) + arr.at(-2);
+    arr.push(newNumber);
+    return fibonacci(n, arr);
+
 }
+
+const fibonacciRecursiveInput = document.getElementById("fibonacciRecursiveInput");
+fibonacciRecursiveInput.addEventListener("change", () => showResult(fibonacci(fibonacciRecursiveInput.value), "fibonacciRecursiveResult"));
+
+function showResult(result, targetID) {
+
+    const paragraph = document.getElementById(targetID);
+    paragraph.innerText = result;
+
+}
+
+
+
+
 
 // console.log(sumRange(3));
 
@@ -140,5 +158,3 @@ function fibonacci(n) {
 // console.log(replicate(3, 5));
 // console.log(replicate(1, 69));
 // console.log(replicate(-2, 6));
-
-console.log(fibonacci(6));
